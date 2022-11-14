@@ -1,8 +1,10 @@
 import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
-import reactLogo from "./assets/react.svg";
+
 import "./App.css";
 import { styled } from "@stitches/react";
 import { useDragonDrop } from "./hooks/useDragonDrop";
+import Store from "./store/store";
+import { observer } from "mobx-react-lite";
 
 const Card = styled("div", {
   width: "300px",
@@ -16,11 +18,13 @@ const CardList: Array<{
   background: CSSProperties["background"];
   text?: string;
 }> = [
-  { background: "black", text: "lof" },
+  { background: "black" },
   { background: "azure" },
   { background: "rgb(138, 43, 226)" },
   { background: "green" },
 ];
+
+console.log(Store.ListCard());
 
 function App() {
   const other = useDragonDrop();
@@ -55,6 +59,24 @@ function App() {
             </Card>
           );
         })}
+        <button
+          onClick={() => {
+            Store.creatCard({
+              styles: {
+                background: "red",
+              },
+            });
+          }}
+        >
+          Create
+        </button>
+        <button
+          onClick={() => {
+            console.log(Store.ListCard());
+          }}
+        >
+          Store
+        </button>
       </div>
       {/* <Card
         css={{
@@ -80,4 +102,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);
