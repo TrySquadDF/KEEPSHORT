@@ -5,6 +5,9 @@ import { styled } from "@stitches/react";
 import { useDragonDrop } from "./hooks/useDragonDrop";
 import Store from "./store/store";
 import { observer } from "mobx-react-lite";
+import store from "./store/store";
+import { Button } from "./component/UI/Button/Button";
+import { Overlay } from "./component/Overlay/Overlay";
 
 const Card = styled("div", {
   width: "300px",
@@ -24,81 +27,51 @@ const CardList: Array<{
   { background: "green" },
 ];
 
-console.log(Store.ListCard());
-
 function App() {
   const other = useDragonDrop();
 
   return (
-    <div
-      className="App"
-      style={{
-        width: "100vw",
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <Overlay>
       <div
+        className="App"
         style={{
-          overflow: "hidden",
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        {CardList.map((el, i) => {
-          return (
-            <Card
-              draggable={false}
-              key={i}
-              css={{
-                background: el.background,
-              }}
-              {...other}
-            >
-              {el?.text}
-            </Card>
-          );
-        })}
-        <button
-          onClick={() => {
-            Store.creatCard({
-              styles: {
-                background: "red",
-              },
-            });
+        <div
+          style={{
+            overflow: "hidden",
           }}
         >
-          Create
-        </button>
-        <button
-          onClick={() => {
-            console.log(Store.ListCard());
-          }}
-        >
-          Store
-        </button>
+          {store.listCard().map((element, index) => {
+            return (
+              <Card
+                css={{
+                  background: "Aqua",
+                }}
+                key={element.key}
+                {...other}
+              />
+            );
+          })}
+          <Button
+            onClick={() => {
+              Store.creatCard({
+                styles: {
+                  background: "red",
+                },
+              });
+            }}
+          >
+            Create
+          </Button>
+        </div>
       </div>
-      {/* <Card
-        css={{
-          width: "300px",
-          height: "100px",
-          background: "rgba(255, 255, 255, 0.87)",
-        }}
-        ref={ref}
-        onMouseDown={(e) => {
-          console.log(e);
-          if (ref.current) {
-            ref.current.style.position = "absolute";
-            ref.current.style.zIndex = "1000";
-            setCount(true);
-          }
-        }}
-        onMouseMove={count ? moveAt : undefined}
-        onMouseUp={(e) => {
-          setCount(false);
-        }}
-      ></Card> */}
-    </div>
+    </Overlay>
   );
 }
 
