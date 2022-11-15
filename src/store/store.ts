@@ -1,13 +1,18 @@
+import { makeAutoObservable } from "mobx";
 import { CardOptions } from "../types/logicsType";
 
 class Store {
   cards: Set<CardOptions> = new Set();
 
-  creatCard(card: CardOptions) {
-    this.cards.add(card);
+  constructor() {
+    makeAutoObservable(this);
   }
 
-  ListCard() {
+  creatCard(card: Omit<CardOptions, "key">) {
+    this.cards.add({ ...card, key: Math.random().toString() });
+  }
+
+  listCard() {
     return [...this.cards];
   }
 }
