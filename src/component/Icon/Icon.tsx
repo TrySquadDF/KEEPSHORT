@@ -1,5 +1,5 @@
 import { FC, HTMLAttributes, useState } from "react";
-import { css } from "../stitches.config";
+import { css, styled } from "../stitches.config";
 import { Box } from "../UI/Box/Box";
 import cn from "classnames";
 
@@ -61,5 +61,39 @@ const BurgerMenu: FC<{ active?: boolean } & HTMLAttributes<HTMLDivElement>> = ({
     </Box>
   );
 };
+
+export const Add = styled(
+  "div",
+  {
+    boxSizing: "border-box",
+    position: "relative",
+    display: "block",
+    width: "22px",
+    height: "22px",
+    border: "2px solid",
+    transform: "scale(var(--ggs,1))",
+    borderRadius: "22px",
+    "&::after , &::before": {
+      content: "",
+      display: "block",
+      boxSizing: "border-box",
+      position: "absolute",
+      width: "10px",
+      height: "2px",
+      background: "currentColor",
+      borderRadius: "5px",
+      top: "8px",
+      left: "4px",
+    },
+  },
+  {
+    "&::after": {
+      width: "2px",
+      height: "10px",
+      top: "4px",
+      left: "8px",
+    },
+  }
+);
 
 export default BurgerMenu;

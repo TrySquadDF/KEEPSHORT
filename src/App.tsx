@@ -1,6 +1,8 @@
-import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
+import { CSSProperties } from "react";
 
+import "overlayscrollbars/overlayscrollbars.css";
 import "./App.css";
+
 import { styled } from "@stitches/react";
 import { useDragonDrop } from "./hooks/useDragonDrop";
 import Store from "./store/store";
@@ -59,6 +61,7 @@ function App() {
             );
           })}
           <Button
+            variants="them"
             onClick={() => {
               Store.creatCard({
                 styles: {
