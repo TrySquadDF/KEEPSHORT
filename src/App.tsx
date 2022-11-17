@@ -7,9 +7,9 @@ import { styled } from "@stitches/react";
 import { useDragonDrop } from "./hooks/useDragonDrop";
 import Store from "./store/store";
 import { observer } from "mobx-react-lite";
-import store from "./store/store";
 import { Button } from "./component/UI/Button/Button";
 import { Overlay } from "./component/Overlay/Overlay";
+import { toJS } from "mobx";
 
 const Card = styled("div", {
   width: "300px",
@@ -49,15 +49,9 @@ function App() {
             overflow: "hidden",
           }}
         >
-          {store.listCard().map((element, index) => {
+          {Store.listCard().map((element, index) => {
             return (
-              <Card
-                css={{
-                  background: "Aqua",
-                }}
-                key={element.key}
-                {...other}
-              />
+              <Card style={toJS(element.styles)} key={element.key} {...other} />
             );
           })}
           <Button

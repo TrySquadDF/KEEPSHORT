@@ -4,5 +4,6 @@ import { ReactNode } from "react";
 export type CardOptions = {
   styles?: CSSProperties;
   content?: ReactNode;
+  Text?: string;
   key: string;
 };
