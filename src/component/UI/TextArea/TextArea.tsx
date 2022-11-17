@@ -13,6 +13,11 @@ export const TextArea = styled("textarea", {
         padding: "10px 15px",
         borderRadius: "10px",
         background: "#232329",
+        transition: "all 0.25s",
+        "&:focus": {
+          background: "Black",
+          border: "1px solid BlueViolet",
+        },
       },
     },
   },

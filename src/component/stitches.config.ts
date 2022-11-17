@@ -25,5 +25,9 @@ export const { styled, keyframes, css } = createStitches({
       marginRight: value,
       marginLeft: value,
     }),
+    my: (value: Stitches.PropertyValue<"padding">) => ({
+      marginTop: value,
+      marginBottom: value,
+    }),
   },
 });

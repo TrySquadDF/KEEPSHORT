@@ -1,7 +1,8 @@
 import type * as Stitches from "@stitches/react";
-import { FC, InputHTMLAttributes } from "react";
+import { FC, InputHTMLAttributes, MutableRefObject } from "react";
 import { styled } from "../../stitches.config";
 import { Box } from "../Box/Box";
+import Label from "../Lable/Lable";
 
 const InputStyles = styled("input", {
   outline: "none",
@@ -13,12 +14,13 @@ const InputStyles = styled("input", {
       them: {
         border: "1px solid rgba(255,255,255 ,0.45)",
         padding: "10px 15px",
-        borderRadius: "10px",
+        borderRadius: "5px",
         fontWeight: "500",
         fontFamily: "inherit",
         transition: "border-color 0.25s",
         "&:focus": {
           borderColor: "BlueViolet",
+          background: "Black",
         },
       },
       outside: {
@@ -31,16 +33,16 @@ const InputStyles = styled("input", {
   },
 });
 
-const Label = styled("label", {
-  display: "flex",
-  fontSize: "10pt",
-  marginLeft: "5px",
-  fontWeight: "bold",
-});
-
 const Input: FC<
   InputHTMLAttributes<HTMLInputElement> &
-    Stitches.VariantProps<typeof InputStyles> & { lable?: string }
+    Stitches.VariantProps<typeof InputStyles> & {
+      lable?: string;
+      ref?:
+        | ((instance: HTMLInputElement | null) => void)
+        | React.RefObject<HTMLInputElement>
+        | null
+        | undefined;
+    }
 > = ({ lable, ...args }) => {
   return (
     <Box>

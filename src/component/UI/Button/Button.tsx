@@ -5,6 +5,8 @@ export const Button = styled("button", {
   padding: "0",
   outline: "none",
   border: "none",
+  background: "none",
+  cursor: "pointer",
   variants: {
     variants: {
       them: {

@@ -12,6 +12,7 @@ import cn from "classnames";
 import Portal from "../Portal/Portal";
 import { HexColorPicker } from "react-colorful";
 import { TextArea } from "../UI/TextArea/TextArea";
+import CreateCardPopup from "../Popup/CreateCard/CreateCard";
 
 const styles = css({
   width: "100px",
@@ -36,14 +37,6 @@ const planeStyle = css({
   gridTemplateRows: "1fr 1fr",
 });
 
-const portal = css({
-  size: "100%",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  backgroundColor: "rgba(0,0,0,0.85)",
-});
-
 export const Overlay: FC<PropsWithChildren> = ({ children }) => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
   const [add, setAdd] = useState<boolean>(false);
@@ -61,46 +54,7 @@ export const Overlay: FC<PropsWithChildren> = ({ children }) => {
           />
         </Box>
         <Box>
-          {add && (
-            <Portal classname={portal()}>
-              <Box
-                css={{
-                  width: "400px",
-                  height: "450px",
-                  maxHeight: "450px",
-                  padding: "30px",
-                  display: "flex",
-                }}
-              >
-                <Box
-                  css={{
-                    size: "100%",
-                    background: "#18181b",
-                    borderRadius: "10px 0 0 10px",
-                  }}
-                >
-                  <form style={{ padding: "1rem" }}>
-                    <Input variants="them" lable="Заголовок" />
-                    <TextArea
-                      styles="fill"
-                      css={{
-                        height: "200px",
-                        width: "80%",
-                      }}
-                    />
-                  </form>
-                </Box>
-                <Box
-                  css={{
-                    width: "40px",
-                    height: "100%",
-                    borderRadius: "0 10px 10px 0",
-                    background: "Aqua",
-                  }}
-                ></Box>
-              </Box>
-            </Portal>
-          )}
+          <CreateCardPopup isOpen={add} onCloseEvent={setAdd} />
         </Box>
       </Box>
       {menuActive && (
