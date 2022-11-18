@@ -82,6 +82,7 @@ const CreateCardPopup: FC<{
   });
 
   const SumbitForm = (e: FormEvent<HTMLFormElement>) => {
+    console.log(input.current?.value, input.current);
     e.preventDefault();
     store.creatCard({
       content: area.current?.value,
