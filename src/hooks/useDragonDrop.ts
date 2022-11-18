@@ -1,30 +1,47 @@
 import { CSSProperties } from "@stitches/react";
-import { MouseEventHandler, useEffect, useState } from "react";
+import {
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+  MutableRefObject,
+  SetStateAction,
+} from "react";
 
 type props<T> = {
   onMouseDown: (e: React.MouseEvent<T, MouseEvent>) => void;
   onMouseUp: (e: React.MouseEvent<T, MouseEvent>) => void;
   onMouseMove: ((e: React.MouseEvent<T, MouseEvent>) => void) | undefined;
   onMouseLeave: (e: React.MouseEvent<T, MouseEvent>) => void;
+  id: string;
 };
 
 export function useDragonDrop<T = HTMLDivElement>(): props<T> {
   const [state, setState] = useState<boolean>(false);
   const [coords, setCords] = useState<null | { x: number; y: number }>();
+  const [link, setLink] = useState<EventTarget | undefined>(undefined);
 
   const moveAt = (e: React.MouseEvent<T, MouseEvent> | MouseEvent) => {
-    if (e.target && (e.target.style as CSSProperties)) {
+    //@ts-ignore
+    if (link && link.style) {
       //@ts-ignore
-      e.target.style.top = e.pageY - coords?.y + "px";
+      link.style.top = e.pageY - coords?.y + "px";
       //@ts-ignore
-      e.target.style.left = e.pageX - coords?.x + "px";
+      link.style.left = e.pageX - coords?.x + "px";
     }
   };
 
   const onMouseDown: MouseEventHandler<T> = (e) => {
-    if (e.target.style) {
-      e.target.style.position = "absolute";
-      e.target.style.zIndex = "1000";
+    setLink(
+      e.nativeEvent
+        .composedPath()
+        //@ts-ignore
+        .find((element) => element.id === "dragle" && true)
+    );
+
+    if (link) {
+      //@ts-ignore
+      link.style.zIndex = "2";
     }
 
     setCords({
@@ -35,7 +52,8 @@ export function useDragonDrop<T = HTMLDivElement>(): props<T> {
     setState(true);
   };
   const onMouseUp: MouseEventHandler<T> = (e) => {
-    e.target.style.zIndex = "1";
+    //@ts-ignore
+    if (link) link.style.zIndex = "1";
 
     setState(false);
   };
@@ -50,5 +68,5 @@ export function useDragonDrop<T = HTMLDivElement>(): props<T> {
       }
     : undefined;
 
-  return { onMouseDown, onMouseUp, onMouseMove, onMouseLeave };
+  return { onMouseDown, onMouseUp, onMouseMove, onMouseLeave, id: "dragle" };
 }
