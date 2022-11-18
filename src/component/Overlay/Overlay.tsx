@@ -2,16 +2,11 @@ import { FC, PropsWithChildren, useState } from "react";
 
 import { Box } from "../UI/Box/Box";
 import { Button } from "../UI/Button/Button";
-import Input from "../UI/Input/Input";
 
 import BurgerMenu, { Add } from "../Icon/Icon";
 
 import { css } from "../stitches.config";
-import cn from "classnames";
 
-import Portal from "../Portal/Portal";
-import { HexColorPicker } from "react-colorful";
-import { TextArea } from "../UI/TextArea/TextArea";
 import CreateCardPopup from "../Popup/CreateCard/CreateCard";
 
 const styles = css({

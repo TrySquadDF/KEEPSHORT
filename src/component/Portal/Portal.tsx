@@ -7,6 +7,7 @@ import { css } from "../stitches.config";
 
 const styleProtal = css({
   position: "absolute",
+  zIndex: "3",
 });
 
 const Portal = ({

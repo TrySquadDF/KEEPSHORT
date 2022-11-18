@@ -3,22 +3,19 @@ import React, {
   FC,
   FormEvent,
   SetStateAction,
-  useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
-import { css } from "../../stitches.config";
-import { Box } from "../../UI/Box/Box";
-import { Button } from "../../UI/Button/Button";
-import { TextArea } from "../../UI/TextArea/TextArea";
-import { RgbStringColorPicker } from "react-colorful";
-import { Popup } from "../Popup";
-import Input from "../../UI/Input/Input";
-import Label from "../../UI/Lable/Lable";
 
-import cn from "classnames";
+import { css } from "../../stitches.config";
+
+import { Popup } from "../Popup";
+import { RgbStringColorPicker } from "react-colorful";
+import { Box, Button, Input, Label, TextArea } from "../../UI";
+
 import store from "../../../store/store";
+
 import { useOnClickOutside } from "usehooks-ts";
 
 const portal = css({
@@ -49,7 +46,7 @@ const colorBar = css({
   borderRadius: "0 10px 10px 0",
 });
 
-const classPopup = css({
+const size100 = css({
   size: "100%",
 });
 
@@ -61,7 +58,6 @@ const CreateCardPopup: FC<{
   const area = useRef<HTMLTextAreaElement>(null);
   const colorRampRef = useRef<HTMLDivElement>(null);
 
-  const [state, setState] = useState(true);
   const [colorRamp, setColorRamp] = useState<{
     state: boolean;
     position: { top: number; left: number };
@@ -114,13 +110,10 @@ const CreateCardPopup: FC<{
               }}
             />
             <Button
+              variants="fill"
               css={{
                 width: "90%",
                 marginTop: "2rem",
-                background: "BlueViolet",
-                padding: "10px 20px",
-                borderRadius: "5px",
-                fontWeight: "bolder",
               }}
             >
               Создать
@@ -144,7 +137,7 @@ const CreateCardPopup: FC<{
       <Popup
         isOpen={colorRamp.state}
         children={
-          <Box css={{ size: "100%" }}>
+          <Box className={size100()}>
             <Box
               ref={colorRampRef}
               children={
@@ -158,7 +151,7 @@ const CreateCardPopup: FC<{
             />
           </Box>
         }
-        className={classPopup()}
+        className={size100()}
       />
     </Popup>
   );

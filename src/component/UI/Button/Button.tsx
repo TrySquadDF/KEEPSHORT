@@ -35,6 +35,12 @@ export const Button = styled("button", {
           backgroundColor: "rgba(255,255,255 ,0.1)",
         },
       },
+      fill: {
+        background: "BlueViolet",
+        padding: "10px 20px",
+        borderRadius: "5px",
+        fontWeight: "bolder",
+      },
     },
   },
 });
