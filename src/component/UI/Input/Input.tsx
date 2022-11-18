@@ -1,8 +1,9 @@
+import React, { InputHTMLAttributes } from "react";
 import type * as Stitches from "@stitches/react";
-import { FC, InputHTMLAttributes, MutableRefObject } from "react";
+
 import { styled } from "../../stitches.config";
-import { Box } from "../Box/Box";
-import Label from "../Lable/Lable";
+
+import { Box, Label } from "..";
 
 const InputStyles = styled("input", {
   outline: "none",
@@ -33,23 +34,19 @@ const InputStyles = styled("input", {
   },
 });
 
-const Input: FC<
+const Input = React.forwardRef<
+  HTMLInputElement,
   InputHTMLAttributes<HTMLInputElement> &
     Stitches.VariantProps<typeof InputStyles> & {
       lable?: string;
-      ref?:
-        | ((instance: HTMLInputElement | null) => void)
-        | React.RefObject<HTMLInputElement>
-        | null
-        | undefined;
     }
-> = ({ lable, ...args }) => {
+>(({ lable, ...args }, ref) => {
   return (
     <Box>
       {lable && <Label children={lable} />}
-      <InputStyles {...args} />
+      <InputStyles ref={ref} {...args} />
     </Box>
   );
-};
+});
 
 export default Input;
