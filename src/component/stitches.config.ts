@@ -1,5 +1,6 @@
 import type * as Stitches from "@stitches/react";
 import { createStitches } from "@stitches/react";
+import { values } from "mobx";
 
 export const { styled, keyframes, css } = createStitches({
   media: {
@@ -28,6 +29,11 @@ export const { styled, keyframes, css } = createStitches({
     my: (value: Stitches.PropertyValue<"padding">) => ({
       marginTop: value,
       marginBottom: value,
+    }),
+    center: (values: boolean = true) => ({
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
     }),
   },
 });

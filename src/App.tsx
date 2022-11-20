@@ -1,3 +1,5 @@
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+
 import "overlayscrollbars/overlayscrollbars.css";
 import "./App.css";
 
@@ -13,36 +15,38 @@ function App() {
   const other = useDragonDrop();
 
   return (
-    <Overlay>
-      <div
-        className="App"
-        style={{
-          width: "100vw",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+    <OverlayScrollbarsComponent>
+      <Overlay>
         <div
+          className="App"
           style={{
-            overflow: "hidden",
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          {Store.listCard().map((element, index) => {
-            return (
-              <Card
-                title={element.Text}
-                content={element.content}
-                style={toJS(element.styles)}
-                key={element.key}
-                {...other}
-              />
-            );
-          })}
+          <div
+            style={{
+              overflow: "hidden",
+            }}
+          >
+            {Store.listCard().map((element) => {
+              return (
+                <Card
+                  title={element.Text}
+                  content={element.content}
+                  style={toJS(element.styles)}
+                  key={element.key}
+                  {...other}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </Overlay>
+      </Overlay>
+    </OverlayScrollbarsComponent>
   );
 }
 
