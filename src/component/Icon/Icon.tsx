@@ -63,7 +63,7 @@ const BurgerMenu: FC<{ active?: boolean } & HTMLAttributes<HTMLDivElement>> = ({
 };
 
 export const Add = styled(
-  "div",
+  "i",
   {
     boxSizing: "border-box",
     position: "relative",
@@ -92,6 +92,49 @@ export const Add = styled(
       height: "10px",
       top: "4px",
       left: "8px",
+    },
+  }
+);
+
+export const EditMarker = styled(
+  "i",
+  {
+    boxSizing: "border-box",
+    position: "relative",
+    display: "block",
+    transform: "scale(var(--ggs,1))",
+    width: "22px",
+    height: "22px",
+    border: "2px solid",
+    borderRadius: "22px",
+    overflow: "hidden",
+    perspective: "20px",
+    "&::after , &::before": {
+      content: "",
+      display: "block",
+      position: "absolute",
+      boxSizing: "border-box",
+    },
+  },
+  {
+    "&::before": {
+      width: "0",
+      height: " 6px",
+      borderBottom: " 6px solid",
+      borderLeft: "3px solid transparent",
+      borderRight: "3px solid transparent",
+      bottom: "9px",
+      left: "6px",
+    },
+    "&::after": {
+      width: "10px",
+      height: "12px",
+      border: "2px solid",
+      borderTop: "4px solid",
+      borderBottom: "0",
+      bottom: "0",
+      left: "4px",
+      transform: "rotateX(60deg)",
     },
   }
 );
