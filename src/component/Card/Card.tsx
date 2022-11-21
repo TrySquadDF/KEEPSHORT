@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { EditMarker } from "../Icon/Icon";
+import { SettingIcon } from "../Icon/Icon";
 import { css } from "../stitches.config";
 import { Box, Button } from "../UI";
 
@@ -38,7 +38,7 @@ const Card: FC<
   return (
     <Box className={CardStyles()} {...args}>
       <Box className={HeaderStyles()}>
-        <span style={{ color: "white", fontSize: "14pt", margin: "0 10px" }}>
+        <span style={{ fontSize: "14pt", margin: "0 10px" }}>
           {title && title}
         </span>
       </Box>
@@ -59,6 +59,7 @@ const Card: FC<
             overflow: "clip",
             wordBreak: "break-word",
             padding: "10px 0",
+            color: "white",
           }}
         >
           {content && content}
@@ -73,7 +74,7 @@ const Card: FC<
           }}
         >
           <Button variants="fill" css={{ padding: "5px", center: true }}>
-            <EditMarker css={{ scale: "0.9" }} />
+            <SettingIcon fill="white" style={{ scale: "0.8" }} />
           </Button>
         </Box>
       </Box>
