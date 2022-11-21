@@ -32,6 +32,7 @@ export function useDragonDrop<T = HTMLDivElement>(): props<T> {
   };
 
   const onMouseDown: MouseEventHandler<T> = (e) => {
+    console.log(e);
     setLink(
       e.nativeEvent
         .composedPath()

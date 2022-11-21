@@ -3,6 +3,7 @@ import React, {
   FC,
   FormEvent,
   SetStateAction,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -11,12 +12,13 @@ import React, {
 import { css } from "../../stitches.config";
 
 import { Popup } from "../Popup";
-import { RgbStringColorPicker } from "react-colorful";
+import { HslStringColorPicker, RgbStringColorPicker } from "react-colorful";
 import { Box, Button, Input, Label, TextArea } from "../../UI";
 
 import store from "../../../store/store";
 
 import { useOnClickOutside } from "usehooks-ts";
+import hslParser from "../../../utility/hslParser/hslParser";
 
 const portal = css({
   size: "100%",
@@ -68,7 +70,7 @@ const CreateCardPopup: FC<{
       left: 0,
     },
   });
-  const [colorState, setColorState] = useState<string>("rgba(255,255,255,1)");
+  const [colorState, setColorState] = useState<string>("hsl(0, 100%, 100%)");
 
   const classPopupPos = useMemo(() => {
     return css({
@@ -82,7 +84,6 @@ const CreateCardPopup: FC<{
   });
 
   const SumbitForm = (e: FormEvent<HTMLFormElement>) => {
-    console.log(input.current?.value, input.current);
     e.preventDefault();
     store.creatCard({
       content: area.current?.value,
@@ -142,7 +143,7 @@ const CreateCardPopup: FC<{
             <Box
               ref={colorRampRef}
               children={
-                <RgbStringColorPicker
+                <HslStringColorPicker
                   color={colorState}
                   onChange={setColorState}
                   className={classPopupPos()}
