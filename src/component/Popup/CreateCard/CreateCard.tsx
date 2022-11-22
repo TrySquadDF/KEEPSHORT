@@ -1,32 +1,21 @@
-import React, {
+import {
   Dispatch,
   FC,
   FormEvent,
   SetStateAction,
-  useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
 
-import { css } from "../../stitches.config";
+import { useOnClickOutside } from "usehooks-ts";
+import { HslStringColorPicker } from "react-colorful";
 
 import { Popup } from "../Popup";
-import { HslStringColorPicker, RgbStringColorPicker } from "react-colorful";
+import { css, portal } from "../../stitches.config";
 import { Box, Button, Input, Label, TextArea } from "../../UI";
 
 import store from "../../../store/store";
-
-import { useOnClickOutside } from "usehooks-ts";
-import hslParser from "../../../utility/hslParser/hslParser";
-
-const portal = css({
-  size: "100%",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  backgroundColor: "rgba(0,0,0,0.85)",
-});
 
 const wrapperstyles = css({
   width: "400px",

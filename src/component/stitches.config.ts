@@ -37,3 +37,11 @@ export const { styled, keyframes, css } = createStitches({
     }),
   },
 });
+
+export const portal = css({
+  size: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "rgba(0,0,0,0.85)",
+});

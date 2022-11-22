@@ -2,6 +2,7 @@ import { FC } from "react";
 import { SettingIcon } from "../Icon/Icon";
 import { css } from "../stitches.config";
 import { Box, Button } from "../UI";
+import store from "../../store/store";
 
 const CardStyles = css({
   backdropFilter: "grayscale(30%)",
@@ -27,14 +28,37 @@ const FooterStyles = css({
   width: "100%",
   background: "#18181b",
   borderRadius: "3px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+});
+
+const ContentStyles = css({
+  width: "90%",
+  height: "40px",
+  textOverflow: "ellipsis",
+  overflow: "clip",
+  wordBreak: "break-word",
+  padding: "10px 0",
+  color: "white",
+});
+
+const ButtonBlockStyles = css({
+  height: "32px",
+  width: "90%",
+  paddingBottom: "10px",
+  display: "flex",
+  justifyContent: "flex-end",
 });
 
 const Card: FC<
   React.HTMLAttributes<HTMLDivElement> & {
     title?: string;
     content?: React.ReactNode;
+    idCard: string;
   }
-> = ({ title, content, ...args }) => {
+> = ({ title, content, idCard, ...args }) => {
   return (
     <Box className={CardStyles()} {...args}>
       <Box className={HeaderStyles()}>
@@ -42,38 +66,16 @@ const Card: FC<
           {title && title}
         </span>
       </Box>
-      <Box
-        css={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-        className={FooterStyles()}
-      >
-        <Box
-          css={{
-            width: "90%",
-            height: "40px",
-            textOverflow: "ellipsis",
-            overflow: "clip",
-            wordBreak: "break-word",
-            padding: "10px 0",
-            color: "white",
-          }}
-        >
-          {content && content}
-        </Box>
-        <Box
-          css={{
-            height: "32px",
-            width: "90%",
-            paddingBottom: "10px",
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-        >
-          <Button variants="fill" css={{ padding: "5px", center: true }}>
+      <Box className={FooterStyles()}>
+        <Box className={ContentStyles()}>{content && content}</Box>
+        <Box className={ButtonBlockStyles()}>
+          <Button
+            variants="fill"
+            css={{ padding: "5px", center: true }}
+            onClick={() => {
+              store.setCardEdit(idCard);
+            }}
+          >
             <SettingIcon fill="white" style={{ scale: "0.8" }} />
           </Button>
         </Box>

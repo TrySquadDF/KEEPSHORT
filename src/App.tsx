@@ -39,6 +39,7 @@ function App() {
                   content={element.content}
                   style={toJS(element.styles)}
                   key={element.key}
+                  idCard={element.key}
                   {...other}
                 />
               );
