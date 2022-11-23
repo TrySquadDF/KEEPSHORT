@@ -1,7 +1,9 @@
-import { FC } from "react";
-import { SettingIcon } from "../Icon/Icon";
+import { FC, useState } from "react";
+import { CardOptions } from "../../types/logicsType";
+import { SettingIcon, TrashcanIcon } from "../Icon/Icon";
 import { css } from "../stitches.config";
-import { Box, Button } from "../UI";
+import { Box, Button, Input } from "../UI";
+
 import store from "../../store/store";
 
 const CardStyles = css({
@@ -56,25 +58,80 @@ const Card: FC<
   React.HTMLAttributes<HTMLDivElement> & {
     title?: string;
     content?: React.ReactNode;
-    idCard: string;
+    Card: CardOptions;
   }
-> = ({ title, content, idCard, ...args }) => {
+> = ({ title, content, Card, ...args }) => {
+  const [disc, setDisc] = useState(content);
+  const [stateTitle, setStateTitle] = useState(title);
+  const [editMode, setEditMode] = useState(false);
+
+  const handelEdit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+    setEditMode((state) => !state);
+    if (editMode) {
+      store.editCard(Card, { ...Card, Text: stateTitle, content: disc });
+    }
+  };
+
   return (
     <Box className={CardStyles()} {...args}>
       <Box className={HeaderStyles()}>
-        <span style={{ fontSize: "14pt", margin: "0 10px" }}>
-          {title && title}
-        </span>
+        <Box css={{ margin: "0 10px" }}>
+          {!editMode ? (
+            <span style={{ fontSize: "14pt" }}>{stateTitle && stateTitle}</span>
+          ) : (
+            <Input
+              style={{
+                color: "inherit",
+              }}
+              value={stateTitle}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              onChange={(e) => {
+                setStateTitle(e.target.value);
+              }}
+            />
+          )}
+        </Box>
       </Box>
       <Box className={FooterStyles()}>
-        <Box className={ContentStyles()}>{content && content}</Box>
+        <Box className={ContentStyles()}>
+          {editMode ? (
+            typeof disc === "string" ? (
+              <Input
+                value={disc}
+                onChange={(e) => {
+                  setDisc(e.target.value);
+                }}
+              />
+            ) : (
+              disc
+            )
+          ) : (
+            disc
+          )}
+        </Box>
         <Box className={ButtonBlockStyles()}>
+          {editMode && (
+            <Button
+              variants="fill"
+              css={{
+                padding: "5px",
+                center: true,
+                marginRight: "0.5rem",
+              }}
+              onClick={() => {
+                store.deleteCard(Card);
+              }}
+            >
+              <TrashcanIcon fill="white" />
+            </Button>
+          )}
           <Button
-            variants="fill"
+            variants={editMode ? "them" : "fill"}
             css={{ padding: "5px", center: true }}
-            onClick={() => {
-              store.setCardEdit(idCard);
-            }}
+            onClick={handelEdit}
           >
             <SettingIcon fill="white" style={{ scale: "0.8" }} />
           </Button>

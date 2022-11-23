@@ -96,49 +96,6 @@ export const Add = styled(
   }
 );
 
-export const EditMarker = styled(
-  "i",
-  {
-    boxSizing: "border-box",
-    position: "relative",
-    display: "block",
-    transform: "scale(var(--ggs,1))",
-    width: "22px",
-    height: "22px",
-    border: "2px solid",
-    borderRadius: "22px",
-    overflow: "hidden",
-    perspective: "20px",
-    "&::after , &::before": {
-      content: "",
-      display: "block",
-      position: "absolute",
-      boxSizing: "border-box",
-    },
-  },
-  {
-    "&::before": {
-      width: "0",
-      height: " 6px",
-      borderBottom: " 6px solid",
-      borderLeft: "3px solid transparent",
-      borderRight: "3px solid transparent",
-      bottom: "9px",
-      left: "6px",
-    },
-    "&::after": {
-      width: "10px",
-      height: "12px",
-      border: "2px solid",
-      borderTop: "4px solid",
-      borderBottom: "0",
-      bottom: "0",
-      left: "4px",
-      transform: "rotateX(60deg)",
-    },
-  }
-);
-
 const styleCSS = css({
   left: "0px",
   width: "100%",
@@ -165,6 +122,28 @@ export const SettingIcon: FC<React.SVGProps<SVGSVGElement>> = ({ ...args }) => {
           d="M9 2h2a2.01 2.01 0 001.235 1.855l.53.22a2.01 2.01 0 002.185-.439l1.414 1.414a2.01 2.01 0 00-.439 2.185l.22.53A2.01 2.01 0 0018 9v2a2.01 2.01 0 00-1.855 1.235l-.22.53a2.01 2.01 0 00.44 2.185l-1.415 1.414a2.01 2.01 0 00-2.184-.439l-.531.22A2.01 2.01 0 0011 18H9a2.01 2.01 0 00-1.235-1.854l-.53-.22a2.009 2.009 0 00-2.185.438L3.636 14.95a2.009 2.009 0 00.438-2.184l-.22-.531A2.01 2.01 0 002 11V9c.809 0 1.545-.487 1.854-1.235l.22-.53a2.009 2.009 0 00-.438-2.185L5.05 3.636a2.01 2.01 0 002.185.438l.53-.22A2.01 2.01 0 009 2zm-4 8l1.464 3.536L10 15l3.535-1.464L15 10l-1.465-3.536L10 5 6.464 6.464 5 10z"
           clipRule="evenodd"
         ></path>
+      </g>
+    </svg>
+  );
+};
+
+export const TrashcanIcon: FC<React.SVGProps<SVGSVGElement>> = ({
+  ...args
+}) => {
+  return (
+    <svg
+      width="100%"
+      height="100%"
+      version="1.1"
+      viewBox="0 0 20 20"
+      x="0px"
+      y="0px"
+      className={styleCSS()}
+      {...args}
+    >
+      <g>
+        <path d="M12 2H8v1H3v2h14V3h-5V2zM4 7v9a2 2 0 002 2h8a2 2 0 002-2V7h-2v9H6V7H4z"></path>
+        <path d="M11 7H9v7h2V7z"></path>
       </g>
     </svg>
   );

@@ -5,6 +5,7 @@ import "./App.css";
 
 import { useDragonDrop } from "./hooks/useDragonDrop";
 import { observer } from "mobx-react-lite";
+import { Box } from "./component/UI";
 import { Overlay } from "./component/Overlay/Overlay";
 import { toJS } from "mobx";
 
@@ -17,16 +18,7 @@ function App() {
   return (
     <OverlayScrollbarsComponent>
       <Overlay>
-        <div
-          className="App"
-          style={{
-            width: "100vw",
-            height: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box css={{ center: true, width: "100vw", height: "100vh" }}>
           <div
             style={{
               overflow: "hidden",
@@ -39,13 +31,13 @@ function App() {
                   content={element.content}
                   style={toJS(element.styles)}
                   key={element.key}
-                  idCard={element.key}
+                  Card={element}
                   {...other}
                 />
               );
             })}
           </div>
-        </div>
+        </Box>
       </Overlay>
     </OverlayScrollbarsComponent>
   );
