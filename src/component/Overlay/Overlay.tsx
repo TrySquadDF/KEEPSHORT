@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useState } from "react";
+import { FC, memo, PropsWithChildren, useState } from "react";
 
 import { Box } from "../UI/Box/Box";
 import { Button } from "../UI/Button/Button";
@@ -32,7 +32,7 @@ const planeStyle = css({
   gridTemplateRows: "1fr 1fr",
 });
 
-export const Overlay: FC<PropsWithChildren> = ({ children }) => {
+export const Overlay: FC<PropsWithChildren> = memo(({ children }) => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
   const [add, setAdd] = useState<boolean>(false);
 
@@ -68,4 +68,4 @@ export const Overlay: FC<PropsWithChildren> = ({ children }) => {
       )}
     </Box>
   );
-};
+});

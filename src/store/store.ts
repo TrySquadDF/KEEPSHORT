@@ -4,23 +4,9 @@ import hslParser from "../utility/hslParser/hslParser";
 
 class Store {
   cards: Set<CardOptions> = new Set();
-  editPopup: boolean = false;
-  cardEdit: CardOptions | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
-  }
-
-  openOrCloseEditPopup() {
-    this.editPopup = !this.editPopup;
-  }
-
-  setCardEdit(key: string) {
-    this.editPopup = !this.editPopup;
-    this.cardEdit = [...this.cards].find((el) =>
-      el.key === key ? true : false
-    );
-    console.log(this.cardEdit);
   }
 
   creatCard(card: Omit<CardOptions, "key">) {
@@ -36,8 +22,13 @@ class Store {
     this.cards.add({ ...card, key: Math.random().toString() });
   }
 
-  editCard(card: CardOptions) {
-    return [...this.cards, { ...card }];
+  deleteCard(card: CardOptions) {
+    return this.cards.delete(card);
+  }
+
+  editCard(oldCard: CardOptions, newCard: CardOptions) {
+    this.cards.delete(oldCard);
+    return this.cards.add(newCard);
   }
 
   listCard() {
