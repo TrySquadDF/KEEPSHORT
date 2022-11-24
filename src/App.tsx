@@ -7,7 +7,6 @@ import { useDragonDrop } from "./hooks/useDragonDrop";
 import { observer } from "mobx-react-lite";
 import { Box } from "./component/UI";
 import { Overlay } from "./component/Overlay/Overlay";
-import { toJS } from "mobx";
 
 import Store from "./store/store";
 import Card from "./component/Card/Card";
@@ -25,16 +24,7 @@ function App() {
             }}
           >
             {Store.listCard().map((element) => {
-              return (
-                <Card
-                  title={element.Text}
-                  content={element.content}
-                  style={toJS(element.styles)}
-                  key={element.key}
-                  Card={element}
-                  {...other}
-                />
-              );
+              return <Card key={element.key} card={element} {...other} />;
             })}
           </div>
         </Box>

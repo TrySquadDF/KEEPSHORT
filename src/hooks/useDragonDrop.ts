@@ -36,7 +36,7 @@ export function useDragonDrop<T = HTMLDivElement>(): props<T> {
       e.nativeEvent
         .composedPath()
         //@ts-ignore
-        .find((element) => element.id === "dragle" && true)
+        .find((element) => element.id === "draggable" && true)
     );
 
     if (link) {
@@ -68,5 +68,5 @@ export function useDragonDrop<T = HTMLDivElement>(): props<T> {
       }
     : undefined;
 
-  return { onMouseDown, onMouseUp, onMouseMove, onMouseLeave, id: "dragle" };
+  return { onMouseDown, onMouseUp, onMouseMove, onMouseLeave, id: "draggable" };
 }
