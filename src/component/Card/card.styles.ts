@@ -11,7 +11,7 @@ const CardStyles = css({
 });
 
 const HeaderStyles = css({
-  height: "40px",
+  minHeight: "50px",
   width: "100%",
   padding: "10px 0",
 });

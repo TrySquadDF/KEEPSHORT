@@ -1,12 +1,4 @@
-import { CSSProperties } from "@stitches/react";
-import {
-  MouseEventHandler,
-  useEffect,
-  useRef,
-  useState,
-  MutableRefObject,
-  SetStateAction,
-} from "react";
+import { MouseEventHandler, useState } from "react";
 
 type props<T> = {
   onMouseDown: (e: React.MouseEvent<T, MouseEvent>) => void;
