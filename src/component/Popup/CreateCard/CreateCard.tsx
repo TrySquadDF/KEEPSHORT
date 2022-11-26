@@ -89,11 +89,17 @@ const CreateCardPopup: FC<{
       <Box className={wrapperstyles()}>
         <Box className={mainblock()}>
           <form style={{ padding: "1rem" }} onSubmit={SumbitForm}>
-            <Input variants="them" lable="Заголовок" ref={input} />
+            <Input
+              variants="them"
+              lable="Заголовок"
+              ref={input}
+              data-testid="title_testid"
+            />
             <Label css={{ marginTop: "0.5rem" }} children="Текст" />
             <TextArea
               ref={area}
               styles="fill"
+              data-testid="textarea_testid"
               maxLength={240}
               css={{
                 height: "200px",
@@ -102,6 +108,7 @@ const CreateCardPopup: FC<{
             />
             <Button
               variants="fill"
+              data-testid="create_button_testid"
               css={{
                 width: "90%",
                 marginTop: "2rem",
@@ -114,6 +121,7 @@ const CreateCardPopup: FC<{
         <Box
           className={colorBar()}
           style={{ backgroundColor: colorState }}
+          data-testid="colorRamp-testid"
           onClick={(e) => {
             setColorRamp((state) => ({
               state: !state.state,

@@ -1,6 +1,10 @@
-import { act, fireEvent, render, renderHook } from "@testing-library/react";
+import {
+  createEvent,
+  fireEvent,
+  render,
+  renderHook,
+} from "@testing-library/react";
 import { useDragonDrop } from "./useDragonDrop";
-import userEvent from "@testing-library/user-event";
 
 describe("DragonDrop", () => {
   const { result } = renderHook(() => useDragonDrop());
@@ -19,10 +23,24 @@ describe("DragonDrop", () => {
     const { getByTestId } = render(
       <div {...result.current} data-testid="test" />
     );
+
     const element = getByTestId("test");
 
-    userEvent.click(element);
+    const down = createEvent.mouseDown(element, {
+      clientX: 10,
+      clientY: 20,
+      buttons: 1,
+    });
 
-    expect(element.id).toBe("draggable");
+    const move = createEvent.mouseMove(element, {
+      clientX: 10,
+      clientY: 20,
+      buttons: 1,
+    });
+
+    const up = createEvent.mouseUp(element, {});
+
+    fireEvent(element, down);
+    fireEvent(element, move);
   });
 });

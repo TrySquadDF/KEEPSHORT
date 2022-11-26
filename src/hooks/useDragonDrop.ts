@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, useRef, useState } from "react";
 
 type props<T> = {
   onMouseDown: (e: React.MouseEvent<T, MouseEvent>) => void;
@@ -24,12 +24,12 @@ export function useDragonDrop<T = HTMLDivElement>(): props<T> {
   };
 
   const onMouseDown: MouseEventHandler<T> = (e) => {
-    setLink(
-      e.nativeEvent
-        .composedPath()
-        //@ts-ignore
-        .find((element) => element.id === "draggable" && true)
-    );
+    const element = e.nativeEvent
+      .composedPath()
+      //@ts-ignore
+      .find((element) => element.id === "draggable" && true);
+
+    setLink(element);
 
     if (link) {
       //@ts-ignore
