@@ -86,7 +86,7 @@ const CreateCardPopup: FC<{
 
   return (
     <Popup className={portal()} isOpen={isOpen}>
-      <Box className={wrapperstyles()}>
+      <Box className={wrapperstyles()} data-testid="Popup_card_testid">
         <Box className={mainblock()}>
           <form style={{ padding: "1rem" }} onSubmit={SumbitForm}>
             <Input
@@ -121,7 +121,7 @@ const CreateCardPopup: FC<{
         <Box
           className={colorBar()}
           style={{ backgroundColor: colorState }}
-          data-testid="colorRamp-testid"
+          data-testid="button_active_colorRamp_testid"
           onClick={(e) => {
             setColorRamp((state) => ({
               state: !state.state,
@@ -145,6 +145,7 @@ const CreateCardPopup: FC<{
                   onChange={setColorState}
                   className={classPopupPos()}
                   style={{ position: "absolute" }}
+                  data-testid="colorRamp_testid"
                 />
               }
             />

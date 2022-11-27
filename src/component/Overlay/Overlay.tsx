@@ -36,16 +36,19 @@ export const Overlay: FC<PropsWithChildren> = memo(({ children }) => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
   const [add, setAdd] = useState<boolean>(false);
 
+  const changeStateMenu = () => {
+    setMenuActive((state) => !state);
+  };
+
   return (
     <Box>
       {children}
       <Box className={styles()}>
         <Box>
           <BurgerMenu
+            data-testid="button_open_menu"
             active={menuActive}
-            onClick={() => {
-              setMenuActive((state) => !state);
-            }}
+            onClick={changeStateMenu}
           />
         </Box>
         <Box>
@@ -53,8 +56,9 @@ export const Overlay: FC<PropsWithChildren> = memo(({ children }) => {
         </Box>
       </Box>
       {menuActive && (
-        <Box className={planeStyle()}>
+        <Box className={planeStyle()} data-testid="menu_testid">
           <Button
+            data-testid="button_plane_add_testid"
             variants="plane"
             onClick={() => {
               setAdd((state) => !state);
