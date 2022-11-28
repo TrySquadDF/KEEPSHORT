@@ -31,6 +31,8 @@ export function useDragonDrop<T = HTMLDivElement>(): props<T> {
 
     setLink(element);
 
+    console.log(link);
+
     if (link) {
       //@ts-ignore
       link.style.zIndex = "2";

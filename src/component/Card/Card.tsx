@@ -32,7 +32,12 @@ const Card: FC<
   };
 
   return (
-    <Box className={CardStyles()} css={{ ...card.styles }} id={id}>
+    <Box
+      data-testid="card_testid"
+      className={CardStyles()}
+      css={{ ...card.styles }}
+      id={id}
+    >
       {editMode === false && (
         <Box
           css={{
@@ -52,6 +57,7 @@ const Card: FC<
             <span style={{ fontSize: "14pt" }}>{title && title}</span>
           ) : (
             <Input
+              data-testid="input_change_title_testid"
               style={{
                 color: "inherit",
               }}
@@ -71,6 +77,7 @@ const Card: FC<
           {editMode ? (
             typeof disc === "string" ? (
               <Input
+                data-testid="input_change_string_body_testid"
                 value={disc}
                 onChange={(e) => {
                   setDisc(e.target.value);
@@ -87,6 +94,7 @@ const Card: FC<
           {editMode && (
             <>
               <Button
+                data-testid="button_delete_testid"
                 className={ButtonStylesAnimate()}
                 variants="fill"
                 onClick={() => {
@@ -96,6 +104,7 @@ const Card: FC<
                 <TrashcanIcon />
               </Button>
               <Button
+                data-testid="button_todefualt_testid"
                 variants="fill"
                 className={ButtonStylesAnimate()}
                 onClick={() => {
@@ -108,6 +117,7 @@ const Card: FC<
             </>
           )}
           <Button
+            data-testid="button_edit_testid"
             className={editMode ? "active" : undefined}
             variants={editMode ? "success" : "fill"}
             css={{ padding: "5px", center: true }}

@@ -17,7 +17,10 @@ function App() {
   return (
     <OverlayScrollbarsComponent>
       <Overlay>
-        <Box css={{ center: true, width: "100vw", height: "100vh" }}>
+        <Box
+          data-testid="root_testid"
+          css={{ center: true, width: "100vw", height: "100vh" }}
+        >
           <div
             style={{
               overflow: "hidden",
