@@ -41,7 +41,7 @@ export const Overlay: FC<PropsWithChildren> = memo(({ children }) => {
   };
 
   return (
-    <Box>
+    <Box data-testid="overlay_testid">
       {children}
       <Box className={styles()}>
         <Box>

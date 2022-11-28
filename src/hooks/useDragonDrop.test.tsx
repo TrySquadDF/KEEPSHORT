@@ -42,5 +42,9 @@ describe("DragonDrop", () => {
 
     fireEvent(element, down);
     fireEvent(element, move);
+    fireEvent(element, down);
+    fireEvent(element, move);
+
+    const test = getByTestId("test");
   });
 });
