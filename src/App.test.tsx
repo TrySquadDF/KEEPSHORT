@@ -30,7 +30,7 @@ describe("App compose comonent", () => {
     ).toBeInTheDocument();
   });
 
-  it("Checking component functionality", () => {
+  it("Checking component functionality", async () => {
     act(() => {
       ReactDOM.createRoot(root).render(<App />);
     });
@@ -78,13 +78,6 @@ describe("App compose comonent", () => {
     const card = document.querySelector(
       "[data-testid='card_testid']"
     ) as HTMLDivElement;
-
-    fireEvent.mouseDown(card);
-    fireEvent.mouseUp(card);
-
-    fireEvent.mouseDown(card);
-    fireEvent.mouseMove(card);
-    fireEvent.mouseUp(card);
 
     expect(card).toBeInTheDocument();
   });

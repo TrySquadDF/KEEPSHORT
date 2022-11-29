@@ -9,6 +9,7 @@ type props<T> = {
 };
 
 export function useDragonDrop<T = HTMLDivElement>(): props<T> {
+  const [test, setTest] = useState<any>(false);
   const [state, setState] = useState<boolean>(false);
   const [coords, setCords] = useState<null | { x: number; y: number }>();
   const [link, setLink] = useState<EventTarget | undefined>(undefined);
@@ -30,8 +31,6 @@ export function useDragonDrop<T = HTMLDivElement>(): props<T> {
       .find((element) => element.id === "draggable" && true);
 
     setLink(element);
-
-    console.log(link);
 
     if (link) {
       //@ts-ignore

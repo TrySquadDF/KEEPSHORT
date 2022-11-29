@@ -4,12 +4,13 @@ import {
   render,
   renderHook,
 } from "@testing-library/react";
+import Test from "./test.drag-drop";
 import { useDragonDrop } from "./useDragonDrop";
 
 describe("DragonDrop", () => {
-  const { result } = renderHook(() => useDragonDrop());
-
   it("hooks returns everything you need", () => {
+    const { result } = renderHook(() => useDragonDrop());
+
     expect(result.current.id === "draggable").toBeTruthy();
     expect(typeof result.current.onMouseUp).toBe("function");
     expect(typeof result.current.onMouseDown).toBe("function");
@@ -20,31 +21,22 @@ describe("DragonDrop", () => {
   });
 
   it("We use a hook on the component", async () => {
-    const { getByTestId } = render(
-      <div {...result.current} data-testid="test" />
-    );
+    const { getByTestId } = render(<Test />);
 
     const element = getByTestId("test");
 
-    const down = createEvent.mouseDown(element, {
-      clientX: 10,
-      clientY: 20,
-      buttons: 1,
+    fireEvent.mouseDown(element, {
+      clientY: 150,
+      clientX: 400,
     });
-
-    const move = createEvent.mouseMove(element, {
-      clientX: 10,
-      clientY: 20,
-      buttons: 1,
+    fireEvent.mouseMove(element, {
+      clientY: 200,
+      clientX: 520,
     });
+    fireEvent.mouseUp(element);
+    const snapShootAfterMouseEvent = getByTestId("test");
 
-    const up = createEvent.mouseUp(element, {});
-
-    fireEvent(element, down);
-    fireEvent(element, move);
-    fireEvent(element, down);
-    fireEvent(element, move);
-
-    const test = getByTestId("test");
+    expect(snapShootAfterMouseEvent.style.zIndex).toBe("1"); // the fireEvent does not support its nativeEvent, because of this, the position cannot be set
+    expect(snapShootAfterMouseEvent.id).toBe("draggable");
   });
 });
