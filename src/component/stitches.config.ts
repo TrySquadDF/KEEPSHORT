@@ -44,4 +44,8 @@ export const portal = css({
   justifyContent: "center",
   alignItems: "center",
   backgroundColor: "rgba(0,0,0,0.85)",
+  "@mobile": {
+    width: "100%",
+    height: "calc(100% + 4rem)",
+  },
 });

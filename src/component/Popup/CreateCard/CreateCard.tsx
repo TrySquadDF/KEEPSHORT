@@ -59,7 +59,7 @@ const CreateCardPopup: FC<{
       left: 0,
     },
   });
-  const [colorState, setColorState] = useState<string>("hsl(0, 100%, 100%)");
+  const [colorState, setColorState] = useState<string>("hsl(260, 50%, 48%)");
 
   const classPopupPos = useMemo(() => {
     return css({
@@ -126,7 +126,10 @@ const CreateCardPopup: FC<{
             setColorRamp((state) => ({
               state: !state.state,
               position: {
-                left: e.nativeEvent.pageX + 15,
+                left:
+                  window.outerWidth > e.nativeEvent.pageX + 215
+                    ? e.nativeEvent.pageX + 15
+                    : e.nativeEvent.pageX - 215,
                 top: e.nativeEvent.pageY + 15,
               },
             }));
