@@ -8,6 +8,7 @@ const CardStyles = css({
   position: "absolute",
   display: "flex",
   flexDirection: "column",
+  touchAction: "none",
 });
 
 const HeaderStyles = css({
