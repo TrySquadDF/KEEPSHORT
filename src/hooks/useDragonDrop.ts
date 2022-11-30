@@ -70,6 +70,9 @@ export function useDragonDrop<T = HTMLDivElement>(): props<T> {
     : undefined;
 
   const onTouchMove: TouchEventHandler<T> = (e) => {
+    e.preventDefault();
+    e.isPropagationStopped();
+
     //@ts-ignore
     if (link && link.style) {
       //@ts-ignore
