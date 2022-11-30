@@ -1,11 +1,7 @@
-import {
-  createEvent,
-  fireEvent,
-  render,
-  renderHook,
-} from "@testing-library/react";
-import Test from "./test.drag-drop";
+import { fireEvent, render, renderHook } from "@testing-library/react";
 import { useDragonDrop } from "./useDragonDrop";
+
+import Test from "./test.drag-drop";
 
 describe("DragonDrop", () => {
   it("hooks returns everything you need", () => {
@@ -18,6 +14,8 @@ describe("DragonDrop", () => {
     expect(
       typeof result.current.onMouseMove === undefined || "function"
     ).toBeTruthy();
+    expect(typeof result.current.onTouchStart).toBe("function");
+    expect(typeof result.current.onTouchMove).toBe("function");
   });
 
   it("We use a hook on the component", async () => {
@@ -36,7 +34,7 @@ describe("DragonDrop", () => {
     fireEvent.mouseUp(element);
     const snapShootAfterMouseEvent = getByTestId("test");
 
-    expect(snapShootAfterMouseEvent.style.zIndex).toBe("1"); // the fireEvent does not support its nativeEvent, because of this, the position cannot be set
+    expect(snapShootAfterMouseEvent.style.zIndex).toBe("1"); // the fireEvent does not support nativeEvent, because of this, the position cannot be set
     expect(snapShootAfterMouseEvent.id).toBe("draggable");
   });
 });
