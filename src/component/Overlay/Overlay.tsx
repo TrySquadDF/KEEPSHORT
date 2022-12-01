@@ -62,6 +62,7 @@ export const Overlay: FC<PropsWithChildren> = memo(({ children }) => {
             variants="plane"
             onClick={() => {
               setAdd((state) => !state);
+              setMenuActive(false);
             }}
           >
             <Box align="center">

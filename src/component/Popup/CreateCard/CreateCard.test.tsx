@@ -36,9 +36,7 @@ describe("CreateCard/Popup", () => {
     const title = "testtitle";
     const body = "testbody";
 
-    const { getByTestId, queryByTestId } = render(
-      <CreateCardPopup open={true} />
-    );
+    const { getByTestId } = render(<CreateCardPopup open={true} />);
 
     expect(store.listCard().length).toBe(0);
 
@@ -60,7 +58,7 @@ describe("CreateCard/Popup", () => {
     expect(store.listCard()[0].Text).toBe(title);
     expect(store.listCard()[0].content).toBe(body);
     expect(store.listCard()[0].styles?.backgroundColor).toBe(
-      "hsl(0, 100%, 100%)"
+      "hsl(260, 50%, 48%)"
     );
   });
 });

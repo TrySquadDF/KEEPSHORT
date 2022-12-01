@@ -43,8 +43,6 @@ export function useDragonDrop<T = HTMLDivElement>(): props<T> {
       link.style.zIndex = "2";
     }
 
-    console.log(e);
-
     setCords({
       y: e.nativeEvent.offsetY,
       x: e.nativeEvent.offsetX,
