@@ -15,6 +15,10 @@ type props<T> = {
   id: string;
 };
 
+/** Возвращает перечень событий: `onMouseDown`, `onMouseUp`, `onMouseMove`,
+ *  `onMouseLeave`, `onTouchMove`, `onTouchStart`,
+ *  что контролируют позицию элемента черезе css свойства: top , left.*/
+
 export function useDragonDrop<T = HTMLDivElement>(): props<T> {
   const [state, setState] = useState<boolean>(false);
   const [coords, setCords] = useState<null | { x: number; y: number }>();
