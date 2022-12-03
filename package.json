@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "test:e2e": "node ./src/test/e2e.js"
   },
   "dependencies": {
     "@stitches/react": "^1.2.8",
@@ -30,6 +31,7 @@
     "@vitejs/plugin-react": "^2.2.0",
     "@vitest/ui": "^0.25.3",
     "jsdom": "^20.0.3",
+    "pptr-testing-library": "^0.7.0",
     "puppeteer": "^19.3.0",
     "typescript": "^4.6.4",
     "vite": "^3.2.3",
