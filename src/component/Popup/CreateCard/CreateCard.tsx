@@ -16,6 +16,7 @@ import { css, portal } from "../../stitches.config";
 import { Box, Button, Input, Label, TextArea } from "../../UI";
 
 import store from "../../../store/store";
+import getDevice from "../../../utility/getDevice/getDevice";
 
 const wrapperstyles = css({
   width: "400px",
@@ -80,6 +81,7 @@ const CreateCardPopup: FC<{
       styles: {
         backgroundColor: colorState,
       },
+      mobile: getDevice(navigator) === "Mobile" ? true : false,
     });
     onCloseEvent(false);
   };

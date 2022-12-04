@@ -5,5 +5,6 @@ export type CardOptions = {
   styles?: CSSProperties;
   content?: ReactNode;
   Text?: string;
+  mobile: boolean;
   key: string;
 };

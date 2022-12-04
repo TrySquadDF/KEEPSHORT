@@ -9,7 +9,12 @@ class Store {
     makeAutoObservable(this);
   }
 
-  creatCard(card: Omit<CardOptions, "key">) {
+  creatCard({
+    mobile = false,
+    ...card
+  }: Omit<Omit<CardOptions, "key">, "mobile"> & { mobile?: boolean }) {
+    console.log(mobile);
+
     const bg = card.styles
       ? card.styles.backgroundColor || card.styles.background
       : false;
@@ -22,7 +27,7 @@ class Store {
       };
     }
 
-    this.cards.add({ ...card, key: Math.random().toString() });
+    this.cards.add({ ...card, key: Math.random().toString(), mobile: mobile });
   }
 
   deleteCard(card: CardOptions) {
