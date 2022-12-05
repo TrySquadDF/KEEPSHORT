@@ -11,6 +11,8 @@ const CardStyles = css({
 });
 
 const HeaderStyles = css({
+  display: "flex",
+  justifyContent: "space-between",
   minHeight: "50px",
   width: "100%",
   padding: "10px 0",
