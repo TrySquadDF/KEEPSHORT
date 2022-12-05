@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { CardOptions } from "../../types/logicsType";
 
-import { BackArrowIcon, SettingIcon, TrashcanIcon } from "../Icon/Icon";
+import { BackArrowIcon, ScIcon, SettingIcon, TrashcanIcon } from "../Icon/Icon";
 import { Box, Button, Input } from "../UI";
 import {
   ButtonBlockStyles,
@@ -52,7 +52,7 @@ const Card: FC<
         />
       )}
       <Box className={HeaderStyles()}>
-        <Box css={{ margin: "0 10px" }}>
+        <Box css={{ margin: "0 10px", display: "flex" }}>
           {!editMode ? (
             <span style={{ fontSize: "14pt" }}>{title && title}</span>
           ) : (
@@ -71,6 +71,14 @@ const Card: FC<
             />
           )}
         </Box>
+        <Button
+          data-testid="button_delete_testid"
+          variants="hover"
+          size="primary"
+          css={{ marginRight: "15px", zIndex: "2" }}
+        >
+          <ScIcon />
+        </Button>
       </Box>
       <Box className={FooterStyles()}>
         <Box className={ContentStyles()}>

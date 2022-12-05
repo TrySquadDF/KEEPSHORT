@@ -8,6 +8,14 @@ export const Button = styled("button", {
   background: "none",
   cursor: "pointer",
   variants: {
+    size: {
+      primary: {
+        center: true,
+        padding: "5px",
+        maxWidth: "32px",
+        maxHeight: "32px",
+      },
+    },
     variants: {
       them: {
         borderRadius: "8px",
@@ -48,6 +56,15 @@ export const Button = styled("button", {
         borderRadius: "5px",
         fontWeight: "bolder",
         transition: "0.2s all",
+      },
+      hover: {
+        background: "none",
+        borderRadius: "5px",
+        fill: "White",
+        transition: "background-color 0.25s",
+        "&:hover": {
+          background: "rgba(255,255,255,0.1)",
+        },
       },
     },
   },
