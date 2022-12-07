@@ -1,4 +1,4 @@
-import React, { FC, RefObject, ReactNode } from "react";
+import React, { DOMAttributes, FC, RefObject } from "react";
 import { Popup } from "../Popup/Popup";
 import { css } from "../stitches.config";
 import { Box } from "../UI";
@@ -9,29 +9,40 @@ import { CSSProperties } from "@stitches/react";
 
 type props = {
   backDropControll: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-  items: { content: ReactNode; ReadOnly: boolean }[];
+  items: {
+    content: string;
+    ReadOnly: boolean;
+    props?: Omit<Omit<DOMAttributes<HTMLDivElement>, "children">, "className">;
+  }[];
   refTrigger?: RefObject<HTMLDivElement> | RefObject<HTMLButtonElement>;
-  coords?: { x: number; y: number };
+  position?: { x: number; y: number };
   offset?: number;
   size?: number;
 };
 
 const styles = css({
-  minHeight: "50px",
+  minHeight: "34px",
   borderRadius: "10px",
   background: "#2b2b30",
   filter: "drop-shadow(rgba(0,0,0,.3) 0px 0px 8px)",
   padding: "10px",
+  userSelect: "none",
   ":nth-child(n)": {
-    borderRadius: "10px",
+    fontSize: "14px",
+    borderRadius: "5px",
+    padding: "5px",
+  },
+  ".item": {
+    "&:hover": {
+      background: "rgba(255,255,255,0.05)",
+      cursor: "pointer",
+    },
   },
 });
 
-const wrapper = css({
-  height: "50px",
-  ":nth-child(n)": {
-    borderRadius: "10px",
-  },
+const stylesItem = css({
+  minHeight: "24px",
+  maxHeight: "48px",
 });
 
 /**
@@ -41,7 +52,9 @@ export const BackDrop: FC<props> = ({
   backDropControll: [isOpen, setOpen],
   refTrigger,
   offset = 5,
-  size = 130,
+  size = 170,
+  position,
+  items,
 }) => {
   useEventListener("pointerdown", (e) => {
     if (isOpen && e.target instanceof HTMLDivElement) {
@@ -65,13 +78,14 @@ export const BackDrop: FC<props> = ({
     let styles: CSSProperties = {};
 
     if (refTrigger && refTrigger.current) {
-      console.log(refTrigger.current.getBoundingClientRect());
       const { top, left, height, width } =
         refTrigger.current.getBoundingClientRect();
       styles = {
         top: `${top + height + offset}px`,
-        left: `${left - size + width}px`,
+        left: `${left - size + width - offset * 2}px`,
       };
+    } else if (position && position.x && position.y) {
+      styles = { top: `${position.y}px`, left: `${position.y}px` };
     }
 
     return css({ ...styles })();
@@ -83,12 +97,22 @@ export const BackDrop: FC<props> = ({
     <Popup
       isOpen={isOpen}
       className={cn(styles(), "backdrop", stylesInline(), sizeStyles())}
-    >
-      <Box className={wrapper()}>
-        <div
-          style={{ width: "100%", height: "100%", backgroundColor: "white" }}
-        ></div>
-      </Box>
-    </Popup>
+      children={
+        <>
+          {items.map((element) => {
+            return (
+              <Box
+                className={cn(
+                  stylesItem(),
+                  element.ReadOnly === false ? "item" : undefined
+                )}
+                children={element.content}
+                {...element.props}
+              />
+            );
+          })}
+        </>
+      }
+    />
   );
 };

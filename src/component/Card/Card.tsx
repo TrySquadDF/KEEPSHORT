@@ -1,4 +1,4 @@
-import { FC, useState, useRef } from "react";
+import { FC, useState, useRef, useMemo } from "react";
 import { CardOptions } from "../../types/logicsType";
 
 import { BackArrowIcon, ScIcon, SettingIcon, TrashcanIcon } from "../Icon/Icon";
@@ -67,7 +67,15 @@ const Card: FC<
       <BackDrop
         refTrigger={refTriggerBackdrop}
         backDropControll={backDropControll}
-        items={[]}
+        items={[
+          {
+            content: `Coздaнa c ${
+              card.mobile ? "мобильного устройства" : "PC"
+            }`,
+            ReadOnly: true,
+          },
+        ]}
+        position={{ x: 10, y: 10 }}
       />
       <Box className={HeaderStyles()}>
         <Box css={{ margin: "0 10px", display: "flex" }}>
