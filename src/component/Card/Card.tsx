@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useRef } from "react";
 import { CardOptions } from "../../types/logicsType";
 
 import { BackArrowIcon, ScIcon, SettingIcon, TrashcanIcon } from "../Icon/Icon";
@@ -13,6 +13,8 @@ import {
 } from "./card.styles";
 
 import store from "../../store/store";
+import { css } from "../stitches.config";
+import { BackDrop } from "../BackDrop/BackDrop";
 
 const Card: FC<
   React.HTMLAttributes<HTMLDivElement> & {
@@ -23,6 +25,9 @@ const Card: FC<
   const [title, setTitle] = useState(card.Text);
   const [editMode, setEditMode] = useState(false);
 
+  const refTriggerBackdrop = useRef<HTMLButtonElement>(null);
+  const backDropControll = useState(false);
+
   const handelEdit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     setEditMode((state) => !state);
@@ -30,6 +35,14 @@ const Card: FC<
       store.editCard(card, { ...card, Text: title, content: disc });
     }
   };
+
+  const adaptvieButton = css({
+    marginRight: "15px",
+    zIndex: "2",
+    svg: {
+      fill: card.styles?.color,
+    },
+  });
 
   return (
     <Box
@@ -51,6 +64,11 @@ const Card: FC<
           {...args}
         />
       )}
+      <BackDrop
+        refTrigger={refTriggerBackdrop}
+        backDropControll={backDropControll}
+        items={[]}
+      />
       <Box className={HeaderStyles()}>
         <Box css={{ margin: "0 10px", display: "flex" }}>
           {!editMode ? (
@@ -62,9 +80,6 @@ const Card: FC<
                 color: "inherit",
               }}
               value={title}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
@@ -75,7 +90,11 @@ const Card: FC<
           data-testid="button_delete_testid"
           variants="hover"
           size="primary"
-          css={{ marginRight: "15px", zIndex: "2" }}
+          className={adaptvieButton()}
+          ref={refTriggerBackdrop}
+          onClick={() => {
+            backDropControll[1]((state) => !state);
+          }}
         >
           <ScIcon />
         </Button>
