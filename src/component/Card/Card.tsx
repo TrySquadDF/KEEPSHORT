@@ -75,7 +75,6 @@ const Card: FC<
             ReadOnly: true,
           },
         ]}
-        position={{ x: 10, y: 10 }}
       />
       <Box className={HeaderStyles()}>
         <Box css={{ margin: "0 10px", display: "flex" }}>

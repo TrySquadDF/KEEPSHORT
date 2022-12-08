@@ -18,6 +18,8 @@ type props = {
   position?: { x: number; y: number };
   offset?: number;
   size?: number;
+  height?: number;
+  isStrict?: boolean;
 };
 
 const styles = css({
@@ -25,7 +27,6 @@ const styles = css({
   borderRadius: "10px",
   background: "#2b2b30",
   filter: "drop-shadow(rgba(0,0,0,.3) 0px 0px 8px)",
-  padding: "10px",
   userSelect: "none",
   ":nth-child(n)": {
     fontSize: "14px",
@@ -40,11 +41,6 @@ const styles = css({
   },
 });
 
-const stylesItem = css({
-  minHeight: "24px",
-  maxHeight: "48px",
-});
-
 /**
  * @param параметры типа: `ref` или `coords` — опциональны, в случае если указан параметр - `ref`, параметр `coords` будет проигнорирован.
  */
@@ -53,10 +49,14 @@ export const BackDrop: FC<props> = ({
   refTrigger,
   offset = 5,
   size = 170,
+  height = 24,
+  isStrict = true,
   position,
   items,
 }) => {
   useEventListener("pointerdown", (e) => {
+    e.stopPropagation();
+    e.stopImmediatePropagation();
     if (isOpen && e.target instanceof HTMLDivElement) {
       const copmonent = e.composedPath().find((el) => {
         if (el instanceof HTMLDivElement) {
@@ -64,12 +64,13 @@ export const BackDrop: FC<props> = ({
         }
       });
 
-      if (copmonent === undefined) {
-        setTimeout(() => {
-          if (isOpen) {
-            setOpen(false);
-          }
-        }, 0);
+      if (copmonent === undefined && isStrict) {
+        if (isStrict)
+          setTimeout(() => {
+            if (isOpen) {
+              setOpen(false);
+            }
+          }, 0);
       }
     }
   });
@@ -85,13 +86,21 @@ export const BackDrop: FC<props> = ({
         left: `${left - size + width - offset * 2}px`,
       };
     } else if (position && position.x && position.y) {
-      styles = { top: `${position.y}px`, left: `${position.y}px` };
+      styles = { top: `${position.y}px`, left: `${position.x}px` };
     }
 
     return css({ ...styles })();
   };
 
-  const sizeStyles = css({ width: `${size}px` });
+  const sizeStyles = css({
+    width: `${size}px`,
+    padding: `${offset}px`,
+  });
+
+  const stylesItem = css({
+    minHeight: `${height}px`,
+    maxHeight: `${height * 2}px`,
+  });
 
   return (
     <Popup
@@ -99,9 +108,10 @@ export const BackDrop: FC<props> = ({
       className={cn(styles(), "backdrop", stylesInline(), sizeStyles())}
       children={
         <>
-          {items.map((element) => {
+          {items.map((element, index) => {
             return (
               <Box
+                key={"index"}
                 className={cn(
                   stylesItem(),
                   element.ReadOnly === false ? "item" : undefined

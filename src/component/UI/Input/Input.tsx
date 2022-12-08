@@ -9,6 +9,7 @@ const InputStyles = styled("input", {
   outline: "none",
   border: "none",
   background: "none",
+  fontFamily: "Roboto",
 
   variants: {
     variants: {

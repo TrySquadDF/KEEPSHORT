@@ -17,6 +17,7 @@ import { Box, Button, Input, Label, TextArea } from "../../UI";
 
 import store from "../../../store/store";
 import getDevice from "../../../utility/getDevice/getDevice";
+import { IconX } from "../../Icon/Icon";
 
 const wrapperstyles = css({
   width: "400px",
@@ -135,6 +136,15 @@ const CreateCardPopup: FC<{
                 top: e.nativeEvent.pageY + 15,
               },
             }));
+          }}
+        />
+        <Button
+          variants="hover"
+          size="primary"
+          children={<IconX />}
+          css={{ marginLeft: "10px" }}
+          onClick={() => {
+            onCloseEvent(false);
           }}
         />
       </Box>

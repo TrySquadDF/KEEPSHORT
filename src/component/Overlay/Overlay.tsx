@@ -3,74 +3,75 @@ import { FC, memo, PropsWithChildren, useState } from "react";
 import { Box } from "../UI/Box/Box";
 import { Button } from "../UI/Button/Button";
 
-import BurgerMenu, { Add } from "../Icon/Icon";
+import { IconApps } from "../Icon/Icon";
 
 import { css } from "../stitches.config";
 
 import CreateCardPopup from "../Popup/CreateCard/CreateCard";
+import { useEventListener } from "usehooks-ts";
+import { BackDrop } from "../BackDrop/BackDrop";
 
 const styles = css({
-  width: "100px",
-  height: "50px",
-  background: "BlueViolet",
+  width: "55px",
+  minHeight: "64px",
+  background: "rgba(56, 56, 56, 1)",
   display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
   position: "absolute",
-  right: 0,
-  top: 0,
-  mx: "30px",
-});
-
-const planeStyle = css({
-  width: "250px",
-  height: "250px",
-  background: "#323239",
-  position: "absolute",
-  top: 50,
-  right: 30,
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gridTemplateRows: "1fr 1fr",
+  borderRadius: "15px",
+  left: 0,
+  top: "calc(50% - 64px)",
+  mx: "10px",
 });
 
 export const Overlay: FC<PropsWithChildren> = memo(({ children }) => {
-  const [menuActive, setMenuActive] = useState<boolean>(false);
+  const backDropControll = useState<boolean>(false);
+  const [backDropCoords, setCoords] = useState<
+    undefined | { x: number; y: number }
+  >(undefined);
   const [add, setAdd] = useState<boolean>(false);
 
-  const changeStateMenu = () => {
-    setMenuActive((state) => !state);
-  };
+  useEventListener("contextmenu", (ev) => {
+    if (backDropControll[0] === false) {
+      setCoords({ x: ev.pageX, y: ev.pageY });
+      backDropControll[1]((state) => !state);
+    }
+  });
 
   return (
     <Box data-testid="overlay_testid">
       {children}
       <Box className={styles()}>
-        <Box>
-          <BurgerMenu
-            data-testid="button_open_menu"
-            active={menuActive}
-            onClick={changeStateMenu}
-          />
-        </Box>
-        <Box>
-          <CreateCardPopup isOpen={add} onCloseEvent={setAdd} />
-        </Box>
+        <Button
+          variants="hover"
+          size="primary"
+          onClick={() => {
+            setAdd(true);
+          }}
+          children={<IconApps />}
+        />
       </Box>
-      {menuActive && (
-        <Box className={planeStyle()} data-testid="menu_testid">
-          <Button
-            data-testid="button_plane_add_testid"
-            variants="plane"
-            onClick={() => {
-              setAdd((state) => !state);
-              setMenuActive(false);
-            }}
-          >
-            <Box align="center">
-              <Add />
-            </Box>
-          </Button>
-        </Box>
-      )}
+      <BackDrop
+        size={100}
+        height={12}
+        backDropControll={backDropControll}
+        items={[
+          {
+            content: "создать",
+            ReadOnly: false,
+            props: {
+              onClick: () => {
+                backDropControll[1](false);
+                setAdd(true);
+              },
+            },
+          },
+        ]}
+        position={backDropCoords}
+        offset={5}
+      />
+      <CreateCardPopup isOpen={add} onCloseEvent={setAdd} />
     </Box>
   );
 });

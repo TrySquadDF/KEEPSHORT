@@ -3,99 +3,6 @@ import { css, styled } from "../stitches.config";
 import { Box } from "../UI/Box/Box";
 import cn from "classnames";
 
-const menuIcon = css({
-  position: "relative",
-  width: "50px",
-  height: "50px",
-  cursor: "pointer",
-  "&.active": {
-    span: {
-      "&:first-of-type": {
-        transform: "rotate(45deg)",
-        top: "5px",
-      },
-      "&:last-of-type": {
-        transform: "rotate(-45deg)",
-        bottom: "5px",
-      },
-    },
-  },
-  div: {
-    margin: "auto",
-    position: "absolute",
-    top: "0",
-    right: "0",
-    left: "0",
-    bottom: "0",
-    width: "22px",
-    height: "12px",
-    span: {
-      position: "absolute",
-      display: "block",
-      width: "100%",
-      height: "2px",
-      backgroundColor: "var(--bar-bg, #000)",
-      borderRadius: "1px",
-      transition: "all 0.2s cubic-bezier(0.1, 0.82, 0.76, 0.965)",
-
-      "&:first-of-type": {
-        top: 0,
-      },
-      "&:last-of-type": {
-        bottom: 0,
-      },
-    },
-  },
-});
-
-const BurgerMenu: FC<{ active?: boolean } & HTMLAttributes<HTMLDivElement>> = ({
-  active = false,
-  ...args
-}) => {
-  return (
-    <Box className={cn(menuIcon(), active && "active")} {...args}>
-      <Box>
-        <span></span>
-        <span></span>
-      </Box>
-    </Box>
-  );
-};
-
-export const Add = styled(
-  "i",
-  {
-    boxSizing: "border-box",
-    position: "relative",
-    display: "block",
-    width: "22px",
-    height: "22px",
-    border: "2px solid",
-    transform: "scale(var(--ggs,1))",
-    borderRadius: "22px",
-    "&::after , &::before": {
-      content: "",
-      display: "block",
-      boxSizing: "border-box",
-      position: "absolute",
-      width: "10px",
-      height: "2px",
-      background: "currentColor",
-      borderRadius: "5px",
-      top: "8px",
-      left: "4px",
-    },
-  },
-  {
-    "&::after": {
-      width: "2px",
-      height: "10px",
-      top: "4px",
-      left: "8px",
-    },
-  }
-);
-
 const styleCSS = css({
   left: "0px",
   width: "100%",
@@ -197,4 +104,56 @@ export const ScIcon: FC<React.SVGProps<SVGSVGElement>> = ({
   );
 };
 
-export default BurgerMenu;
+export const IconApps: FC<
+  React.SVGProps<SVGSVGElement> & { size?: number }
+> = ({ size = 24, color = "currentColor", stroke = 2, ...props }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-apps"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      strokeWidth={stroke}
+      stroke={color}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <rect x={4} y={4} width={6} height={6} rx={1} />
+      <rect x={4} y={14} width={6} height={6} rx={1} />
+      <rect x={14} y={14} width={6} height={6} rx={1} />
+      <line x1={14} y1={7} x2={20} y2={7} />
+      <line x1={17} y1={4} x2={17} y2={10} />
+    </svg>
+  );
+};
+
+export const IconX: FC<React.SVGProps<SVGSVGElement> & { size?: number }> = ({
+  size = 24,
+  color = "currentColor",
+  stroke = 2,
+  ...props
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-x"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      strokeWidth={stroke}
+      stroke={color}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <line x1={18} y1={6} x2={6} y2={18} />
+      <line x1={6} y1={6} x2={18} y2={18} />
+    </svg>
+  );
+};
