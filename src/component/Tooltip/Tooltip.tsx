@@ -1,11 +1,4 @@
-import {
-  FC,
-  PropsWithChildren,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FC, PropsWithChildren, RefObject, useEffect, useState } from "react";
 import debounce from "../../utility/debounce/debounce";
 import { css } from "../stitches.config";
 import { Box } from "../UI";
@@ -15,7 +8,6 @@ type Props = {
   toComponentRef?: RefObject<any>;
   id?: string;
   offset?: number;
-  position?: "alignX" | "alignY";
 } & PropsWithChildren;
 
 const ToolTipClass = css({
@@ -44,9 +36,7 @@ export const ToolTip: FC<Props> = ({
   toComponentRef,
   id,
   offset = 10,
-  position = "alignY",
 }) => {
-  const ToolTipRef = useRef<HTMLDivElement>(null);
   const [styles, setStyles] = useState<React.CSSProperties>({
     left: 0,
     top: 0,
@@ -62,33 +52,15 @@ export const ToolTip: FC<Props> = ({
       if (component instanceof HTMLElement) {
         const { x, y, width, height } = component.getBoundingClientRect();
 
-        console.log(component.getBoundingClientRect());
-
         component.addEventListener(
           "mouseenter",
           debounce(() => {
             const xCoord = x + width + offset;
-            const yCoord = y + height + offset;
-            const ToolTipSize = ToolTipRef?.current?.getBoundingClientRect();
 
-            if (
-              position === "alignY" &&
-              ToolTipSize &&
-              window.innerWidth > xCoord + ToolTipSize.width
-            ) {
+            if (window.innerWidth > xCoord) {
               setStyles({
                 left: xCoord,
-                top: y + ToolTipSize.height / 2 - height,
-              });
-            } else if (
-              position === "alignX" &&
-              ToolTipSize &&
-              window.innerWidth > xCoord + ToolTipSize.width &&
-              window.innerHeight > yCoord + ToolTipSize.height
-            ) {
-              setStyles({
-                left: xCoord, //  y + ToolTipSize.width / 2 - height
-                top: y + ToolTipSize.width / 2 - height,
+                top: y,
               });
             }
           }, 300)
@@ -104,7 +76,7 @@ export const ToolTip: FC<Props> = ({
   }, []);
 
   return (
-    <Box className={ToolTipClass()} style={styles} ref={ToolTipRef}>
+    <Box className={ToolTipClass()} style={styles} id="testIDAS">
       <p>{title}</p>
     </Box>
   );
