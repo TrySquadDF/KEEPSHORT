@@ -8,16 +8,22 @@ import {
   useState,
 } from "react";
 
+import cn from "classnames";
+
 import { useOnClickOutside } from "usehooks-ts";
 import { HslStringColorPicker } from "react-colorful";
 
 import { Popup } from "../Popup";
 import { css, portal } from "../../stitches.config";
 import { Box, Button, Input, Label, TextArea } from "../../UI";
+import { IconX } from "../../Icon/Icon";
 
 import store from "../../../store/store";
 import getDevice from "../../../utility/getDevice/getDevice";
-import { IconX } from "../../Icon/Icon";
+
+const overflow = css({
+  overflow: "hidden",
+});
 
 const wrapperstyles = css({
   width: "400px",
@@ -88,7 +94,7 @@ const CreateCardPopup: FC<{
   };
 
   return (
-    <Popup className={portal()} isOpen={isOpen}>
+    <Popup className={cn(portal(), overflow())} isOpen={isOpen}>
       <Box className={wrapperstyles()} data-testid="Popup_card_testid">
         <Box className={mainblock()}>
           <form style={{ padding: "1rem" }} onSubmit={SumbitForm}>

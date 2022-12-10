@@ -10,6 +10,7 @@ import { css } from "../stitches.config";
 import CreateCardPopup from "../Popup/CreateCard/CreateCard";
 import { useEventListener } from "usehooks-ts";
 import { BackDrop } from "../BackDrop/BackDrop";
+import { ToolTip } from "../Tooltip/Tooltip";
 
 const styles = css({
   width: "55px",
@@ -50,6 +51,7 @@ export const Overlay: FC<PropsWithChildren> = memo(({ children }) => {
             setAdd(true);
           }}
           children={<IconApps />}
+          id="bntas"
         />
       </Box>
       <BackDrop
@@ -71,6 +73,7 @@ export const Overlay: FC<PropsWithChildren> = memo(({ children }) => {
         position={backDropCoords}
         offset={5}
       />
+      <ToolTip title="создать" id="bntas" />
       <CreateCardPopup isOpen={add} onCloseEvent={setAdd} />
     </Box>
   );

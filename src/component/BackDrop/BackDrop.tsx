@@ -55,8 +55,6 @@ export const BackDrop: FC<props> = ({
   items,
 }) => {
   useEventListener("pointerdown", (e) => {
-    e.stopPropagation();
-    e.stopImmediatePropagation();
     if (isOpen && e.target instanceof HTMLDivElement) {
       const copmonent = e.composedPath().find((el) => {
         if (el instanceof HTMLDivElement) {
@@ -108,10 +106,10 @@ export const BackDrop: FC<props> = ({
       className={cn(styles(), "backdrop", stylesInline(), sizeStyles())}
       children={
         <>
-          {items.map((element, index) => {
+          {items.map((element, idx) => {
             return (
               <Box
-                key={"index"}
+                key={idx}
                 className={cn(
                   stylesItem(),
                   element.ReadOnly === false ? "item" : undefined
