@@ -51,7 +51,7 @@ export const Overlay: FC<PropsWithChildren> = memo(({ children }) => {
             setAdd(true);
           }}
           children={<IconApps />}
-          id="bntas"
+          id="ToolTip"
         />
       </Box>
       <BackDrop
@@ -73,7 +73,7 @@ export const Overlay: FC<PropsWithChildren> = memo(({ children }) => {
         position={backDropCoords}
         offset={5}
       />
-      <ToolTip title="создать" id="bntas" />
+      <ToolTip offset={15} title="создать" id="ToolTip" />
       <CreateCardPopup isOpen={add} onCloseEvent={setAdd} />
     </Box>
   );
