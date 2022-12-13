@@ -18,6 +18,9 @@ describe("App compose comonent", () => {
   });
 
   it("Initializing the App root component", () => {
+    const { getComputedStyle } = window;
+    window.getComputedStyle = (elt) => getComputedStyle(elt);
+
     act(() => {
       ReactDOM.createRoot(root).render(<App />);
     });

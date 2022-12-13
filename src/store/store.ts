@@ -13,8 +13,6 @@ class Store {
     mobile = false,
     ...card
   }: Omit<Omit<CardOptions, "key">, "mobile"> & { mobile?: boolean }) {
-    console.log(mobile);
-
     const bg = card.styles
       ? card.styles.backgroundColor || card.styles.background
       : false;

@@ -1,9 +1,8 @@
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
-import "overlayscrollbars/overlayscrollbars.css";
 import "./App.css";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useDragonDrop } from "./hooks/useDragonDrop";
 import { observer } from "mobx-react-lite";
 
@@ -26,7 +25,10 @@ function App() {
   }, []);
 
   return (
-    <OverlayScrollbarsComponent>
+    <OverlayScrollbarsComponent
+      options={{ scrollbars: { theme: "os-theme-dark" } }}
+      defer
+    >
       <Overlay>
         <Box
           data-testid="root_testid"
