@@ -94,7 +94,7 @@ const Card: FC<
           )}
         </Box>
         <Button
-          data-testid="button_delete_testid"
+          data-testid="button_specifications_testid"
           variants="hover"
           size="primary"
           className={adaptvieButton()}

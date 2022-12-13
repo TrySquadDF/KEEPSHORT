@@ -52,6 +52,7 @@ export const Overlay: FC<PropsWithChildren> = memo(({ children }) => {
           }}
           children={<IconApps />}
           id="ToolTip"
+          data-testid="button_open-create-popup_testid"
         />
       </Box>
       <BackDrop

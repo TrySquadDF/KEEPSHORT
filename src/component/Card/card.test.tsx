@@ -12,7 +12,7 @@ describe("test card", () => {
       background: "White",
       color: "Black",
     },
-    mobile: false
+    mobile: false,
   };
 
   const card = {

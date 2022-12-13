@@ -30,15 +30,12 @@ describe("e2e", async () => {
       const rootSelector = "#root";
       await page.waitForSelector(rootSelector);
 
-      await page.$("[data-testid='button_open_menu']").then(async (btn) => {
-        if (btn === null) throw Error("not found overlay button_open_menu");
-        await btn.click();
-      });
-
       await page
-        .$("[data-testid='button_plane_add_testid']")
+        .$("[data-testid='button_open-create-popup_testid']")
         .then(async (btn) => {
-          if (btn === null) throw Error("overlay hasn't been opened");
+          console.log(btn);
+          if (btn === null)
+            throw Error("not found overlay button_open-create-popup_testid");
           await btn.click();
         });
 

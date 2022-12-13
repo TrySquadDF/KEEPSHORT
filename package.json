@@ -7,8 +7,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:e2e": "node ./src/test/e2e.js"
+    "test:e2e": "node ./src/test/e2e.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@stitches/react": "^1.2.8",
@@ -32,6 +34,7 @@
     "@types/webfontloader": "^1.6.35",
     "@vitejs/plugin-react": "^2.2.0",
     "@vitest/ui": "^0.25.3",
+    "husky": "^8.0.2",
     "jsdom": "^20.0.3",
     "pptr-testing-library": "^0.7.0",
     "puppeteer": "^19.3.0",

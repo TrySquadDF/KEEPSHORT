@@ -37,13 +37,7 @@ describe("App compose comonent", () => {
 
     fireEvent.click(
       document.querySelector(
-        "[data-testid='button_open_menu']"
-      ) as HTMLDivElement
-    );
-
-    fireEvent.click(
-      document.querySelector(
-        "[data-testid='button_plane_add_testid']"
+        "[data-testid='button_open-create-popup_testid']"
       ) as HTMLDivElement
     );
 

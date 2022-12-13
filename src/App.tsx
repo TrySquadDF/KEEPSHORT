@@ -13,7 +13,6 @@ import { Overlay } from "./component/Overlay/Overlay";
 import WebFont from "webfontloader";
 import Store from "./store/store";
 import Card from "./component/Card/Card";
-import { ToolTip } from "./component/Tooltip/Tooltip";
 
 function App() {
   const other = useDragonDrop();
@@ -39,17 +38,6 @@ function App() {
           {Store.listCard().map((element) => {
             return <Card key={element.key} card={element} {...other} />;
           })}
-
-          <img
-            src="/vite.svg"
-            style={{
-              marginTop: "-4rem",
-              userSelect: "none",
-              opacity: 0.2,
-              zIndex: -1,
-            }}
-            draggable={false}
-          />
         </Box>
       </Overlay>
     </OverlayScrollbarsComponent>
