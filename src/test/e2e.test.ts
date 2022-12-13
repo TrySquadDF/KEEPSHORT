@@ -3,13 +3,13 @@ import type { PreviewServer } from "vite";
 import puppeteer from "puppeteer";
 import { afterAll, beforeAll, describe, expect, test } from "vitest";
 import type { Browser, Page } from "puppeteer";
-import { queries } from "pptr-testing-library";
+import { getDocument, queries } from "pptr-testing-library";
 
 describe("e2e", async () => {
   let server: PreviewServer;
   let browser: Browser;
   let page: Page;
-  let { queryByTestId } = queries;
+  let { queryByTestId, getByTestId } = queries;
 
   beforeAll(async () => {
     server = await preview({ preview: { port: 3000 } });
@@ -30,10 +30,11 @@ describe("e2e", async () => {
       const rootSelector = "#root";
       await page.waitForSelector(rootSelector);
 
+      const $document = await getDocument(page);
+
       await page
         .$("[data-testid='button_open-create-popup_testid']")
         .then(async (btn) => {
-          console.log(btn);
           if (btn === null)
             throw Error("not found overlay button_open-create-popup_testid");
           await btn.click();
@@ -61,7 +62,6 @@ describe("e2e", async () => {
         await btn.click();
       });
     } catch (e) {
-      console.error(e);
       expect(e).toBeUndefined();
     }
   }, 60_000);
